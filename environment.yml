@@ -1,0 +1,15 @@
+name: 575-app
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - numpy
+  - pandas
+  - vega_datasets
+  - vl-convert-python
+  - ipykernel
+  - jupyterlab
+  - pip
+
+  - pip:
+    - python-dotenv
