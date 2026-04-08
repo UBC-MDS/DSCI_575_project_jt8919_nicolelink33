@@ -12,4 +12,4 @@ dependencies:
   - pip=26.0.1
 
   - pip:
-    - python-dotenv=1.2.2
+    - python-dotenv==1.2.2
