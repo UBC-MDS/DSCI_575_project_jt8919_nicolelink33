@@ -106,14 +106,26 @@ if st.button("Search"):
                 st.info("No reviews found matching your query.")
             else:
                 # Display each result nicely formatted
-                for i, (doc, score) in enumerate(results): # Unpack the (doc, score) tuple
-                    # Access attributes from the LangChain Document object
-                    # LangChain docs store info in .page_content and .metadata
-                    rating = doc.metadata.get('rating', 'N/A')
-                    review_text = doc.page_content
+                for i, (doc, score) in enumerate(results):
+                    # 1. Extract metadata
+                    metadata = doc.metadata
+                    rating = metadata.get('rating', 'N/A')
+                    price = metadata.get('price', 'N/A')
                     
+                    # 2. Clean up the page_content
+                    # Your content format: "Product Title: ... \n Category: ... \n Review Text: ..."
+                    parts = doc.page_content.split('\n')
+                    title = parts[0].replace("Product Title: ", "") if len(parts) > 0 else "Unknown Product"
+                    review = parts[2].replace("Review Text: ", "") if len(parts) > 2 else doc.page_content
+
+                    # 3. Render the UI Card
                     with st.container():
-                        # Display the score from the search and the rating from metadata
-                        st.markdown(f"**Match Score: {score:.2f}** | **Rating: {rating} / 5.0** ⭐️")
-                        st.write(f"*{review_text}*")
+                        # Using columns to put Score and Rating side-by-side
+                        col1, col2, col3 = st.columns([1, 1, 1])
+                        col1.metric("Match Score", f"{score:.2f}")
+                        col2.metric("Rating", f"{rating}/5 ⭐")
+                        col3.metric("Price", f"${price}")
+
+                        st.markdown(f"### {title}")
+                        st.write(f"\"{review}\"")
                         st.divider()
