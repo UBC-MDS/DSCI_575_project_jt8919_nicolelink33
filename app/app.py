@@ -1,0 +1,119 @@
+import sys
+import os
+from pathlib import Path
+
+project_root = Path(__file__).resolve().parent.parent
+if str(project_root) not in sys.path:
+    sys.path.append(str(project_root))
+os.chdir(project_root)
+
+import streamlit as st
+import pandas as pd
+import pickle
+from langchain_community.retrievers import BM25Retriever
+from src.utils import simple_tokenize
+from src.bm25 import search_with_scores, display_top_results
+
+
+# -----------------------------------------------------------------------------
+# 1. Load Data and Models (Cached)
+# -----------------------------------------------------------------------------
+# st.cache_resource ensures these heavy objects are only loaded once per session
+@st.cache_resource
+def load_search_engines():
+    # TODO: Import and initialize your actual BM25 and Semantic models here.
+    # For example: loading the BM25 index and the Hugging Face embedding model.
+    print("Loading search models into memory...") 
+
+    #bm25_path = Path("data/bm25_retriever.pkl")
+    bm25_path = Path('models/bm25_metadata_index_2.pkl')
+
+    if not bm25_path.exists():
+        st.error(f"Could not find the index file at {bm25_path.absolute()}")
+        return None, None
+
+    with open(bm25_path, 'rb') as f:
+        print("Loading BM25 index from pickle...")
+        bm25_model = pickle.load(f)
+
+    # Returning dummy objects for semantic for now:
+    semantic_model = "SEMANTIC_READY"
+
+    return bm25_model, semantic_model
+
+bm25, semantic = load_search_engines()
+
+# -----------------------------------------------------------------------------
+# 2. Define Search Wrapper Functions
+# -----------------------------------------------------------------------------
+def run_bm25_search(query, model):
+    # TODO: Replace with your actual BM25 function execution
+    # return your_bm25_function(query, model)
+    
+
+    # Mock return data
+    #return [
+    #   {"text": "This product was amazing, highly recommend!", "rating": 5.0},
+    #    {"text": "Good value for the price, but shipping was slow.", "rating": 4.0}
+    #]
+    return search_with_scores(model, query, k=3)
+
+def run_semantic_search(query, model):
+    # TODO: Replace with your actual semantic search function execution
+    # return your_semantic_function(query, model)
+
+    # Mock return data
+    return [
+        {"text": "Absolutely stellar quality and performance.", "rating": 5.0},
+        {"text": "It works as expected. Nothing special.", "rating": 3.0}
+    ]
+
+# -----------------------------------------------------------------------------
+# 3. Build the Dashboard UI
+# -----------------------------------------------------------------------------
+st.title("🔍 Amazon Reviews Search Engine")
+st.markdown("Search through product reviews using exact keyword matching or semantic meaning.")
+
+# User Inputs
+query = st.text_input("Enter your search query:", placeholder="e.g., 'battery life' or 'durable'")
+
+# Search Type Toggle
+search_type = st.radio(
+    "Select Search Method:",
+    ("BM25 (Keyword Match)", "Semantic (Meaning Match)"),
+    horizontal=True
+)
+
+# Search Execution
+if st.button("Search"):
+    if not query:
+        st.warning("Please enter a query first!")
+    else:
+        with st.spinner("Searching reviews..."):
+            
+            # Route to the correct function based on the radio button
+            if "BM25" in search_type:
+                results = run_bm25_search(query, bm25)
+            else:
+                results = run_semantic_search(query, semantic)
+            
+            # -----------------------------------------------------------------
+            # 4. Display Results
+            # -----------------------------------------------------------------
+            st.subheader(f"Top Results for: '{query}'")
+            
+            if not results:
+                st.info("No reviews found matching your query.")
+            else:
+                # Display each result nicely formatted
+                for i, (doc, score) in enumerate(results): # Unpack the (doc, score) tuple
+                    # Access attributes from the LangChain Document object
+                    # LangChain docs store info in .page_content and .metadata
+                    rating = doc.metadata.get('rating', 'N/A')
+                    review_text = doc.page_content
+                    
+                    with st.container():
+                        # Display the score from the search and the rating from metadata
+                        st.markdown(f"**Match Score: {score:.2f}** | **Rating: {rating} / 5.0** ⭐️")
+                        st.write(f"*{review_text}*")
+                        st.divider()
