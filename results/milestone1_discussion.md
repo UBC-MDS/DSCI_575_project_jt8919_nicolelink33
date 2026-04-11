@@ -3,7 +3,7 @@
 ## Sample Queries and Comparison of Results:
 ### Query 1: "sewing machine"
 Results of BM25:
-==================================================
+```text
 #1 | BM25 Score: 6.371
 Product: Magicfly Mini Sewing Machine for Beginner, Dual Speed Portable Sewing Machine Machine with Extension Table, Light, Sewing Kit for Household, Travel
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -29,9 +29,10 @@ Product: Casulo 5 in 1 Heat Press Machine Combo, 360-Degree Rotation Tshirt Pres
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
 Review:  THE GOOD:<br />--------------<br />* Heavy duty, super high quality machine.<br />* Spacious 12x15 platform.<br />* Big and bright LCD control panel.<br />* 360 degree "swing away" design gives you...
 --------------------------------------------------
+```
 
 Results of Semantic Search:
-==================================================
+```text
 #1 | L2 Distance: 0.517
 Product: SINGER | 4423 Heavy Duty Sewing Machine & Beginners & Sewing Machine Accessory Kit, Including 9 Presser Feet, Twin Needle, and Case, Clear - Sewing Made Easy
 Rating:  ⭐⭐ (2/5)
@@ -57,6 +58,7 @@ Product: SINGER 5532 Heavy Duty Extra-High Sewing Speed Portable Sewing Machine 
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
 Review:  The SINGER 5532 HEAVY DUTY SEWING MACHINE is a high-speed machine that sews 1,100 stitches per minute.  It's a lot faster than my ancient Singer "Touch & Sew" machine (a Christmas gift from the 60s,...
 --------------------------------------------------
+```
 
 Discussion of Query 1: "sewing machine"
 This is one of the simplest queries we tested, which we expected would work well for both BM25 and semantic search methods, as this phrase would likely appear in both the title and review text, and likely has a well-defined embedding. As we can see in the results above, both search methods successfully returned sewing machines in their top results. The BM25 search seems to have returned higher ranked sewing machines, while the semantic search method prioritizes smallest L2 distance over highest rating. 
