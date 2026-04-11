@@ -3,6 +3,7 @@
 ## Sample Queries and Comparison of Results:
 ### Query 1: "sewing machine"
 Results of BM25:
+==================================================
 ```text
 #1 | BM25 Score: 6.371
 Product: Magicfly Mini Sewing Machine for Beginner, Dual Speed Portable Sewing Machine Machine with Extension Table, Light, Sewing Kit for Household, Travel
@@ -32,6 +33,7 @@ Review:  THE GOOD:<br />--------------<br />* Heavy duty, super high quality mac
 ```
 
 Results of Semantic Search:
+==================================================
 ```text
 #1 | L2 Distance: 0.517
 Product: SINGER | 4423 Heavy Duty Sewing Machine & Beginners & Sewing Machine Accessory Kit, Including 9 Presser Feet, Twin Needle, and Case, Clear - Sewing Made Easy
@@ -61,12 +63,13 @@ Review:  The SINGER 5532 HEAVY DUTY SEWING MACHINE is a high-speed machine that 
 ```
 
 Discussion of Query 1: "sewing machine"
-This is one of the simplest queries we tested, which we expected would work well for both BM25 and semantic search methods, as this phrase would likely appear in both the title and review text, and likely has a well-defined embedding. As we can see in the results above, both search methods successfully returned sewing machines in their top results. The BM25 search seems to have returned higher ranked sewing machines, while the semantic search method prioritizes smallest L2 distance over highest rating. 
+This is one of the simplest queries we tested, which we expected would work well for both BM25 and semantic search methods, as this phrase would likely appear in both the title and review text, and likely has a well-defined embedding. As we can see in the results above, both search methods successfully returned sewing machines in their top results. The BM25 search seems to have returned mostly higher ranked sewing machines, while the semantic search method prioritizes smallest L2 distance over highest rating. Therefore, BM25 search appears to have performed better in this case, but both work well. 
 
 
 ### Query 2: "acrylic paint"
 Results of BM25:
 ==================================================
+``` text
 #1 | BM25 Score: 7.611
 Product: Shuttle Art Acrylic Paint, 18 Colors Acrylic Paint Bottle Set (240ml/8.12oz), Rich Pigmented Acrylic Paints, Bulk Painting Supplies for Artists, Beginners and Kids on Rocks Crafts Canvas Wood Ceramic
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -92,9 +95,11 @@ Product: Codirom Wet Palette Paint Palette for Acrylic Paints Palette for Miniat
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
 Review:  When you have that perfect color mixed, you can make more of it and store it in this container. It helps your acrylic last longer by not giving it the air it needs to dry out. Thank you for reading...
 --------------------------------------------------
+```
 
 Results of Semantic Search:
 ==================================================
+```text
 #1 | L2 Distance: 0.739
 Product: Nicpro 32 Colors Outdoor Acrylic Paint Bulk with Brush and Sponge, Knife, Non-Toxic Paint for Multi-surface Rock, Wood, Fabric, Leather, Crafts, Canvas, Shoes and Wall Painting
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -120,9 +125,11 @@ Product: Droaful Acrylic Paint Pens Markers Set-12 Color Paint Pens for Rock Pai
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
 Review:  [[VIDEOID:4b61b5307061a0b09025f531b8ca331]] Nice paint pens - very easy to use.<br /><br />The finish is nice.  You can make very pretty art with them<br /><br />Design is pretty cool.  So many nice...
 --------------------------------------------------
+```
 
 ### Query 3: "Singer 5532"
 Results of BM25:
+```text
 ==================================================
 #1 | BM25 Score: 14.257
 Product: SINGER 5532 Heavy Duty Extra-High Sewing Speed Portable Sewing Machine with Metal Frame and Stainless Steel Bedplate
@@ -149,9 +156,11 @@ Product: SINGER | 4423 Heavy Duty Sewing Machine & Beginners & Sewing Machine Ac
 Rating:  ⭐⭐ (2/5)
 Review:  I was looking for something that could sew jeans and such heavy fabrics or multiple layered fabrics. Thought this one would be great as the name itself says heavy duty. Machine is super easy to...
 --------------------------------------------------
+```
 
 Results of Semantic Search:
 ==================================================
+```text
 #1 | L2 Distance: 1.113
 Product: SINGER 57261 Vintage Sewing Baskets, Large, Pink/Black
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -177,10 +186,15 @@ Product: SINGER | 4423 Heavy Duty Sewing Machine & Beginners & Sewing Machine Ac
 Rating:  ⭐⭐ (2/5)
 Review:  I was looking for something that could sew jeans and such heavy fabrics or multiple layered fabrics. Thought this one would be great as the name itself says heavy duty. Machine is super easy to...
 --------------------------------------------------
+```
+
+Discussion of Query 3: "Singer 5532"
+
 
 ### Query 4: "Animal stickers"
 Results of BM25 Search:
 ==================================================
+```text
 #1 | BM25 Score: 11.866
 Product: Lilihan Diamond Dots Kits 5D DIY Diamond Painting Kits for Kids Cartoon Animal Stickers Paint with Diamonds Kits DIY Arts Crafts
 Rating:  ⭐ (1/5)
@@ -206,9 +220,11 @@ Product: Hot Off The Press Dazzles Stickers 6"X9" 3 Sheets-Black Swirls, Flouris
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
 Review:  I love these stickers! They look like stamped/heat embossed designs, but they're peel-and-stick.<br /><br />I use these for cards, and they're super easy to use.  One tip: use tweezers to help align...
 --------------------------------------------------
+```
 
 Results of Semantic Search:
 ==================================================
+```text
 #1 | L2 Distance: 0.808
 Product: Knaid Butterfly Dragonfly Insects Stickers Set (240 Pieces) - PET Transparent Waterproof Decorative Decals for Scrapbook DIY Crafts Album Bullet Journal Planner Water Bottles Phone Cases Laptops
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -234,10 +250,12 @@ Product: Jolee's Boutique Cooking Dimensional Stickers
 Rating:  ⭐ (1/5)
 Review:  My daughter recently moved out on her own and I’m making her a recipe scrapbook.  I was so excited to get these as an addition to the scrapbook, but my excitement was short lived. These are super...
 --------------------------------------------------
+```
 
 ### Query 5: "Purple gel pen"
 Results of BM25:
 ==================================================
+```text
 #1 | L2 Distance: 0.821
 Product: Gel Pens,Tanmit Gel Pens Set, 120 Colored Gel Pen plus 120 Refills for Adults Coloring Books, Drawing, Art Projects (No Duplicates)
 Rating:  ⭐ (1/5)
@@ -263,9 +281,11 @@ Product: Shuttle Art 18 Pack Micro-line Pens, Waterproof Archival Ink, 11 Colors
 Rating:  ⭐⭐⭐ (3/5)
 Review:  It's what I get for not paying attention, but this is not the brand I thought I was ordering. I thought to exchange the pens when I realized, but I did need the pens and the assortment was good, so I...
 --------------------------------------------------
+```
 
 Results of Semantic Search:
 ==================================================
+```text
 #1 | L2 Distance: 0.821
 Product: Gel Pens,Tanmit Gel Pens Set, 120 Colored Gel Pen plus 120 Refills for Adults Coloring Books, Drawing, Art Projects (No Duplicates)
 Rating:  ⭐ (1/5)
@@ -291,10 +311,12 @@ Product: Shuttle Art 18 Pack Micro-line Pens, Waterproof Archival Ink, 11 Colors
 Rating:  ⭐⭐⭐ (3/5)
 Review:  It's what I get for not paying attention, but this is not the brand I thought I was ordering. I thought to exchange the pens when I realized, but I did need the pens and the assortment was good, so I...
 --------------------------------------------------
+```
 
 ### Query 6: "cute embroidery patterns"
 Results of BM25:
 ==================================================
+```text
 #1 | BM25 Score: 12.982
 Product: Bonroy 4 Sets Embroidery Kit for Beginners,Embroidery Kit for Art Craft Handy Sewing Include Embroidery Clothes with Pattern,Embroidery Hoops, Instructions,Color Threads Needle Kit (Multi 4)
 Rating:  ⭐⭐⭐⭐ (4/5)
@@ -320,9 +342,11 @@ Product: Euro-Notions Embroidery Machine Needles, Size 11/75, 5-Pack (3 Pack)
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
 Review:  These are my favorite machine embroidery needles!
 --------------------------------------------------
+```
 
 Results of Semantic Search:
 ==================================================
+```text
 #1 | L2 Distance: 0.665
 Product: Stitcher's Revolution Iron-On Transfer Pattern for Embroidery, Around The World Landmarks
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -348,10 +372,12 @@ Product: Shuanshuo Black Series Floral Cotton Fabric Textile Quilting Patchwork 
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
 Review:  November mix of patterns
 --------------------------------------------------
+```
 
 ### Query 7: "yarn made of natural fibers"
 Results of BM25:
 ==================================================
+```text
 #1 | BM25 Score: 9.364
 Product: Knit Picks Dishie Worsted Weight 100% Cotton Yarn Purple - 100 g (Mulberry)
 Rating:  ⭐⭐⭐ (3/5)
@@ -377,9 +403,11 @@ Product: (3 Pack) Lion Brand Yarn Vanna's Choice Yarn, Fisherman
 Rating:  ⭐⭐⭐ (3/5)
 Review:  it's alright for american yarn. i don't understand why european yarn is so beautiful and all we can get in america is the same type of yarn for many years...there is no progress.
 --------------------------------------------------
+```
 
 Results of Semantic Search:
 ==================================================
+```text
 #1 | L2 Distance: 0.812
 Product: Arm Knitting Yarn for Chunky Braided Knot Throw Blanket DIY, Soft Extra Cotton Washable Tube Bulky Giant Yarn for Weave Craft Crochet (Dark Gray 2.2lb)
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -405,10 +433,12 @@ Product: Gisimo 100% Inner Mongolian Cashmere Yarn Luxurious Hand Knitting Yarn 
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
 Review:  Best quality cashmere I've ever had. It doesn't shed and hasn't pilled yet either. Wonderfully soft and such nice colors. But of course, as always, I wish there were more colors. This worked up...
 --------------------------------------------------
+```
 
 ### Query 8: "best paint for wood"
 Results of BM25:
 ==================================================
+```text
 #1 | BM25 Score: 10.062
 Product: Unfinished Wood Ornaments, PETUOL DIY 32pcs 4x3in Creative Irregular Blank Wood Natural Slices for DIY Crafts, Painting, Wood Burning, Writing, Photo Props, Coasters and Home Decorations
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -434,9 +464,11 @@ Product: Shuttle Art Acrylic Paint, 18 Colors Acrylic Paint Bottle Set (240ml/8.
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
 Review:  Great Paints, Great Price and my Artist Daughter is thrilled with them.
 --------------------------------------------------
+```
 
 Results of Semantic Search:
 ==================================================
+```text
 #1 | L2 Distance: 1.048
 Product: Moshify Pebeo Vitrea 160 Glass Paint - Transparent Colour Glossy and Brilliant - Made in France - DIY Craft Paint for Stained Glass and More - Set of 8 Colors Bundled Application Brushes
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -462,10 +494,12 @@ Product: White Paint Markers for Rocks Painting, Ceramic, Glass, Wood, Fabric, C
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
 Review:  White touches can make or break designs. On dark surfaces, pure whites can be hard to achieve. These white acrylic paint markers are the solution. Once activated (easy), the white acrylic paint flows...
 --------------------------------------------------
+```
 
 ### Query 9: "what's the best type of yarn to make clothes with"
 Results of BM25:
 ==================================================
+```text
 #1 | BM25 Score: 17.290
 Product: YUYOYE Super Soft Fluffy Fur Yarn for Crochet and Knitting, Faux Fur Thick & Quick Bulky Yarn (07-Aqua Grey,6Pack)
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -491,9 +525,11 @@ Product: Zoid 3-in-1 Adjustable Utility Knife with Contoured Body and Trax-Grip 
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
 Review:  I selected this utility knife after having a good impression of another Zoid knife, which has proven to be one of the best utility knives I have ever used. I like this one too.<br /><br />There are a...
 --------------------------------------------------
+```
 
 Results of Semantic Search:
 ==================================================
+```text
 #1 | L2 Distance: 0.689
 Product: Arm Knitting Yarn for Chunky Braided Knot Throw Blanket DIY, Soft Extra Cotton Washable Tube Bulky Giant Yarn for Weave Craft Crochet (Dark Gray 2.2lb)
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -519,10 +555,12 @@ Product: Lion Brand Yarn Bonbons Yarn, Nature 8 x 28 yd/26 m
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
 Review:  I have found these Bonbons to be just wonderful for making motif projects and flower, etc accents.  Picture a scarf, a little bag, or even crochet jewelry in a rainbow of colors.  The Lion company...
 --------------------------------------------------
+```
 
 ### Query 10: "what is a good type of yarn for a beginner"
 Results of BM25:
 ==================================================
+```text
 #1 | BM25 Score: 20.107
 Product: VGOODALL 5PCS Round Knitting Loom Set Circular Loom Set Hook Needles with 4 Skeins Acrylic Yarn for Hat Scarf Shawl Sweater Sock Pompom
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -548,9 +586,11 @@ Product: YUYOYE Super Soft Fluffy Fur Yarn for Crochet and Knitting, Faux Fur Th
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
 Review:  One of the softest yarns I've ever felt. It's fur effect is very good looking, and I have made some incredible amigurumi from this and I just can't imagine them looking any better with any other...
 --------------------------------------------------
+```
 
 Results of Semantic Search:
 ==================================================
+```text
 #1 | L2 Distance: 0.751
 Product: Arm Knitting Yarn for Chunky Braided Knot Throw Blanket DIY, Soft Extra Cotton Washable Tube Bulky Giant Yarn for Weave Craft Crochet (Dark Gray 2.2lb)
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -576,4 +616,5 @@ Product: Embroidery Kit for Beginners Funny - 4 Sets Cross Stitch Kits Beginner 
 Rating:  ⭐⭐⭐⭐ (4/5)
 Review:  This is a nice kit, but my wife and kids were excited to try something new and actually found this difficult to pick up. It claims to be for beginners, however without any stitch experience it wasn't...
 --------------------------------------------------
+```
 
