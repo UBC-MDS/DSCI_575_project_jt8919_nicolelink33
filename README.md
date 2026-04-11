@@ -2,18 +2,21 @@
 ### DSCI_575_project_jt8919_nicolelink33
 Authors: Jennifer Tsang, Nicole Link
 
-This is an interactive tool which allows for search and retrieval of arts and crafts supplies based on an Amazon 2023 reviews dataset.
+This is an interactive tool which allows for search and retrieval of arts and crafts supplies based on an [Amazon 2023 reviews dataset](https://amazon-reviews-2023.github.io/).
 
 ## Description
 ### Dataset: 
 The dataset contains Amazon reviews collected in 2023 by McAuley Lab. It contains reviews on products that belong to the Arts and Crafts category. Our dashboard specifically searches from a subset of this dataset. The subset removed very short reviews (< 20 characters), stratified the dataset by short and long reviews, and by the number of stars, and sampled 50 reviews per strata, prioritizing the most helpful reviews. 
 
-### Data Proecessing:
-
+### Data Processing:
+To prepare the sampled subset for search indexing, the tabular data was transformed into LangChain `Document` objects. We engineered a dense text string for the `page_content` by concatenating the product title, category, and review text. All structured attributes such as numerical ratings, price, and helpful votes were separated and preserved as queryable metadata. For lexical search compatibility, the text underwent preprocessing using a custom tokenizer to convert characters to lowercase, remove punctuation, and split strings into discrete words.
 
 ### Retrieval Workflows:
+The system employs a dual-engine architecture to retrieve relevant documents based on user queries:
 
+- **Lexical Search (BM25)**: A sparse retrieval engine that uses a custom tokenizer to match exact keywords.
 
+- **Semantic Search (FAISS)**: A dense vector database powered by Facebook AI Similarity Search. Documents and queries are embedded into a 384-dimensional vector space using the `all-MiniLM-L6-v2` HuggingFace model.
 
 ## Instructions to Run Locally:
 
