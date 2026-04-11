@@ -8,11 +8,11 @@ if str(project_root) not in sys.path:
 os.chdir(project_root)
 
 import streamlit as st
-import pandas as pd
 import pickle
-from langchain_community.retrievers import BM25Retriever
-from src.utils import simple_tokenize
-from src.bm25 import search_with_scores, display_top_results
+from langchain_community.vectorstores import FAISS
+from langchain_huggingface import HuggingFaceEmbeddings
+from src.bm25 import search_bm25_with_scores
+from src.semantic import search_semantic_with_scores
 
 
 # -----------------------------------------------------------------------------
@@ -21,13 +21,11 @@ from src.bm25 import search_with_scores, display_top_results
 # st.cache_resource ensures these heavy objects are only loaded once per session
 @st.cache_resource
 def load_search_engines():
-    # TODO: Import and initialize your actual BM25 and Semantic models here.
-    # For example: loading the BM25 index and the Hugging Face embedding model.
+
     print("Loading search models into memory...") 
 
-    #bm25_path = Path("data/bm25_retriever.pkl")
+    # Load bm25 search model
     bm25_path = Path('models/bm25_metadata_index_2.pkl')
-
     if not bm25_path.exists():
         st.error(f"Could not find the index file at {bm25_path.absolute()}")
         return None, None
@@ -36,9 +34,21 @@ def load_search_engines():
         print("Loading BM25 index from pickle...")
         bm25_model = pickle.load(f)
 
-    # Returning dummy objects for semantic for now:
-    semantic_model = "SEMANTIC_READY"
+    # Load semantic search model
+    faiss_path = "models/faiss_index"
+    if not Path(faiss_path).exists():
+        st.error(f"Could not find the FAISS index folder at {faiss_path}")
+        return bm25_model, None
+    
+    print("Loading FAISS index and HuggingFace embeddings...")
+    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
+    semantic_model = FAISS.load_local(
+        folder_path=faiss_path,
+        embeddings=embeddings,
+        allow_dangerous_deserialization=True
+    )
+    
     return bm25_model, semantic_model
 
 bm25, semantic = load_search_engines()
@@ -47,26 +57,10 @@ bm25, semantic = load_search_engines()
 # 2. Define Search Wrapper Functions
 # -----------------------------------------------------------------------------
 def run_bm25_search(query, model):
-    # TODO: Replace with your actual BM25 function execution
-    # return your_bm25_function(query, model)
-    
-
-    # Mock return data
-    #return [
-    #   {"text": "This product was amazing, highly recommend!", "rating": 5.0},
-    #    {"text": "Good value for the price, but shipping was slow.", "rating": 4.0}
-    #]
-    return search_with_scores(model, query, k=3)
+    return search_bm25_with_scores(model, query, k=3)
 
 def run_semantic_search(query, model):
-    # TODO: Replace with your actual semantic search function execution
-    # return your_semantic_function(query, model)
-
-    # Mock return data
-    return [
-        {"text": "Absolutely stellar quality and performance.", "rating": 5.0},
-        {"text": "It works as expected. Nothing special.", "rating": 3.0}
-    ]
+    return search_semantic_with_scores(model, query, k=3)
 
 # -----------------------------------------------------------------------------
 # 3. Build the Dashboard UI

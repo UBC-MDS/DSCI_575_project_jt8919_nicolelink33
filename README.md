@@ -16,7 +16,7 @@ The system employs a dual-engine architecture to retrieve relevant documents bas
 
 - **Lexical Search (BM25)**: A sparse retrieval engine that uses a custom tokenizer to match exact keywords.
 
-- **Semantic Search (FAISS)**: A dense vector database powered by Facebook AI Similarity Search. Documents and queries are embedded into a 384-dimensional vector space using the `all-MiniLM-L6-v2` HuggingFace model.
+- **Semantic Search (FAISS)**: A dense vector database powered by Facebook AI Similarity Search. Documents and user queries are embedded into a vector space using `sentence-transformers` and `all-MiniLM-L6-v2` model, allowing the system to retrieve results based on contextual meaning.
 
 ## Instructions to Run Locally:
 
