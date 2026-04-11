@@ -1,9 +1,9 @@
 # Milestone 1 Qualitative Evaluation:
 
 ## Sample Queries and Comparison of Results:
-### Query 1: "sewing machine"
-Results of BM25:
-==================================================
+## Query 1: "sewing machine"
+#### Results of BM25:
+
 ```text
 #1 | BM25 Score: 6.371
 Product: Magicfly Mini Sewing Machine for Beginner, Dual Speed Portable Sewing Machine Machine with Extension Table, Light, Sewing Kit for Household, Travel
@@ -32,8 +32,8 @@ Review:  THE GOOD:<br />--------------<br />* Heavy duty, super high quality mac
 --------------------------------------------------
 ```
 
-Results of Semantic Search:
-==================================================
+#### Results of Semantic Search:
+
 ```text
 #1 | L2 Distance: 0.517
 Product: SINGER | 4423 Heavy Duty Sewing Machine & Beginners & Sewing Machine Accessory Kit, Including 9 Presser Feet, Twin Needle, and Case, Clear - Sewing Made Easy
@@ -66,9 +66,9 @@ Discussion of Query 1: "sewing machine"
 This is one of the simplest queries we tested, which we expected would work well for both BM25 and semantic search methods, as this phrase would likely appear in both the title and review text, and likely has a well-defined embedding. As we can see in the results above, both search methods successfully returned sewing machines in their top results. The BM25 search seems to have returned mostly higher ranked sewing machines, while the semantic search method prioritizes smallest L2 distance over highest rating. Therefore, BM25 search appears to have performed better in this case, but both work well. 
 
 
-### Query 2: "acrylic paint"
-Results of BM25:
-==================================================
+## Query 2: "acrylic paint"
+#### Results of BM25:
+
 ``` text
 #1 | BM25 Score: 7.611
 Product: Shuttle Art Acrylic Paint, 18 Colors Acrylic Paint Bottle Set (240ml/8.12oz), Rich Pigmented Acrylic Paints, Bulk Painting Supplies for Artists, Beginners and Kids on Rocks Crafts Canvas Wood Ceramic
@@ -97,8 +97,8 @@ Review:  When you have that perfect color mixed, you can make more of it and sto
 --------------------------------------------------
 ```
 
-Results of Semantic Search:
-==================================================
+#### Results of Semantic Search:
+
 ```text
 #1 | L2 Distance: 0.739
 Product: Nicpro 32 Colors Outdoor Acrylic Paint Bulk with Brush and Sponge, Knife, Non-Toxic Paint for Multi-surface Rock, Wood, Fabric, Leather, Crafts, Canvas, Shoes and Wall Painting
@@ -127,10 +127,10 @@ Review:  [[VIDEOID:4b61b5307061a0b09025f531b8ca331]] Nice paint pens - very easy
 --------------------------------------------------
 ```
 
-### Query 3: "Singer 5532"
-Results of BM25:
+## Query 3: "Singer 5532"
+#### Results of BM25:
+
 ```text
-==================================================
 #1 | BM25 Score: 14.257
 Product: SINGER 5532 Heavy Duty Extra-High Sewing Speed Portable Sewing Machine with Metal Frame and Stainless Steel Bedplate
 Rating:  ⭐⭐⭐⭐⭐ (5/5)
@@ -158,8 +158,8 @@ Review:  I was looking for something that could sew jeans and such heavy fabrics
 --------------------------------------------------
 ```
 
-Results of Semantic Search:
-==================================================
+#### Results of Semantic Search:
+
 ```text
 #1 | L2 Distance: 1.113
 Product: SINGER 57261 Vintage Sewing Baskets, Large, Pink/Black
@@ -189,11 +189,11 @@ Review:  I was looking for something that could sew jeans and such heavy fabrics
 ```
 
 Discussion of Query 3: "Singer 5532"
-
+We expected this query to work better for BM25 search, rather than semantic search, as we are trying to match the product number in direct keyword search. From the results, we can see that BM25 returned the right product first, and other related products after that. Semantic Search returned very similar results, but the desired sewing machine model was the 2nd option in these results. BM25 worked slightly better in this scenario, but both still returned useful results. 
 
 ### Query 4: "Animal stickers"
-Results of BM25 Search:
-==================================================
+#### Results of BM25 Search:
+
 ```text
 #1 | BM25 Score: 11.866
 Product: Lilihan Diamond Dots Kits 5D DIY Diamond Painting Kits for Kids Cartoon Animal Stickers Paint with Diamonds Kits DIY Arts Crafts
@@ -222,8 +222,8 @@ Review:  I love these stickers! They look like stamped/heat embossed designs, bu
 --------------------------------------------------
 ```
 
-Results of Semantic Search:
-==================================================
+#### Results of Semantic Search:
+
 ```text
 #1 | L2 Distance: 0.808
 Product: Knaid Butterfly Dragonfly Insects Stickers Set (240 Pieces) - PET Transparent Waterproof Decorative Decals for Scrapbook DIY Crafts Album Bullet Journal Planner Water Bottles Phone Cases Laptops
@@ -253,8 +253,8 @@ Review:  My daughter recently moved out on her own and I’m making her a recipe
 ```
 
 ### Query 5: "Purple gel pen"
-Results of BM25:
-==================================================
+#### Results of BM25:
+
 ```text
 #1 | L2 Distance: 0.821
 Product: Gel Pens,Tanmit Gel Pens Set, 120 Colored Gel Pen plus 120 Refills for Adults Coloring Books, Drawing, Art Projects (No Duplicates)
@@ -283,8 +283,8 @@ Review:  It's what I get for not paying attention, but this is not the brand I t
 --------------------------------------------------
 ```
 
-Results of Semantic Search:
-==================================================
+#### Results of Semantic Search:
+
 ```text
 #1 | L2 Distance: 0.821
 Product: Gel Pens,Tanmit Gel Pens Set, 120 Colored Gel Pen plus 120 Refills for Adults Coloring Books, Drawing, Art Projects (No Duplicates)
@@ -314,8 +314,8 @@ Review:  It's what I get for not paying attention, but this is not the brand I t
 ```
 
 ### Query 6: "cute embroidery patterns"
-Results of BM25:
-==================================================
+#### Results of BM25:
+
 ```text
 #1 | BM25 Score: 12.982
 Product: Bonroy 4 Sets Embroidery Kit for Beginners,Embroidery Kit for Art Craft Handy Sewing Include Embroidery Clothes with Pattern,Embroidery Hoops, Instructions,Color Threads Needle Kit (Multi 4)
@@ -344,8 +344,8 @@ Review:  These are my favorite machine embroidery needles!
 --------------------------------------------------
 ```
 
-Results of Semantic Search:
-==================================================
+#### Results of Semantic Search:
+
 ```text
 #1 | L2 Distance: 0.665
 Product: Stitcher's Revolution Iron-On Transfer Pattern for Embroidery, Around The World Landmarks
@@ -374,9 +374,12 @@ Review:  November mix of patterns
 --------------------------------------------------
 ```
 
+Discussion of query 6: "cute embroidery patterns"
+This query is a little more complex than the previous ones, and is looking for semantic matching of the word cute, not direct keyword matching. Therefore, we expect semantic search to work better than BM25 search here. We can see from the results that BM25 returned some embroidery kits, the first of which is called cute in its review text. The other products are embroidery related as well, although none of the 5 are patterns. Semantic search did return a pattern as its first result, and then similar embroidery kits after. Both search methods worked fairly well, although semantic search worked a bit better here. 
+
 ### Query 7: "yarn made of natural fibers"
-Results of BM25:
-==================================================
+#### Results of BM25:
+
 ```text
 #1 | BM25 Score: 9.364
 Product: Knit Picks Dishie Worsted Weight 100% Cotton Yarn Purple - 100 g (Mulberry)
@@ -405,8 +408,8 @@ Review:  it's alright for american yarn. i don't understand why european yarn is
 --------------------------------------------------
 ```
 
-Results of Semantic Search:
-==================================================
+#### Results of Semantic Search:
+
 ```text
 #1 | L2 Distance: 0.812
 Product: Arm Knitting Yarn for Chunky Braided Knot Throw Blanket DIY, Soft Extra Cotton Washable Tube Bulky Giant Yarn for Weave Craft Crochet (Dark Gray 2.2lb)
@@ -435,9 +438,12 @@ Review:  Best quality cashmere I've ever had. It doesn't shed and hasn't pilled 
 --------------------------------------------------
 ```
 
+Discussion of query 7: "yarn made of natural fibers"
+This search is again more complex, as it does not specifically list out what the user wants (eg. cotton, wool, etc yarn). Instead, the search method needs to capture the meaning of natural fibers, so we think semantic search will work better here. BM25 returned a couple cotton yarns, but also some acrylic (non-natural) yarns. Semantic search returned some cotton and one cashmere yarn, which is good, but also some acrylic yarns mixed in as well. Neither search method was really able to capture the desired results here. 
+
 ### Query 8: "best paint for wood"
-Results of BM25:
-==================================================
+#### Results of BM25:
+
 ```text
 #1 | BM25 Score: 10.062
 Product: Unfinished Wood Ornaments, PETUOL DIY 32pcs 4x3in Creative Irregular Blank Wood Natural Slices for DIY Crafts, Painting, Wood Burning, Writing, Photo Props, Coasters and Home Decorations
@@ -466,8 +472,8 @@ Review:  Great Paints, Great Price and my Artist Daughter is thrilled with them.
 --------------------------------------------------
 ```
 
-Results of Semantic Search:
-==================================================
+#### Results of Semantic Search:
+
 ```text
 #1 | L2 Distance: 1.048
 Product: Moshify Pebeo Vitrea 160 Glass Paint - Transparent Colour Glossy and Brilliant - Made in France - DIY Craft Paint for Stained Glass and More - Set of 8 Colors Bundled Application Brushes
@@ -497,8 +503,8 @@ Review:  White touches can make or break designs. On dark surfaces, pure whites 
 ```
 
 ### Query 9: "what's the best type of yarn to make clothes with"
-Results of BM25:
-==================================================
+#### Results of BM25:
+
 ```text
 #1 | BM25 Score: 17.290
 Product: YUYOYE Super Soft Fluffy Fur Yarn for Crochet and Knitting, Faux Fur Thick & Quick Bulky Yarn (07-Aqua Grey,6Pack)
@@ -527,8 +533,8 @@ Review:  I selected this utility knife after having a good impression of another
 --------------------------------------------------
 ```
 
-Results of Semantic Search:
-==================================================
+#### Results of Semantic Search:
+
 ```text
 #1 | L2 Distance: 0.689
 Product: Arm Knitting Yarn for Chunky Braided Knot Throw Blanket DIY, Soft Extra Cotton Washable Tube Bulky Giant Yarn for Weave Craft Crochet (Dark Gray 2.2lb)
@@ -558,8 +564,8 @@ Review:  I have found these Bonbons to be just wonderful for making motif projec
 ```
 
 ### Query 10: "what is a good type of yarn for a beginner"
-Results of BM25:
-==================================================
+#### Results of BM25:
+
 ```text
 #1 | BM25 Score: 20.107
 Product: VGOODALL 5PCS Round Knitting Loom Set Circular Loom Set Hook Needles with 4 Skeins Acrylic Yarn for Hat Scarf Shawl Sweater Sock Pompom
@@ -588,8 +594,8 @@ Review:  One of the softest yarns I've ever felt. It's fur effect is very good l
 --------------------------------------------------
 ```
 
-Results of Semantic Search:
-==================================================
+#### Results of Semantic Search:
+
 ```text
 #1 | L2 Distance: 0.751
 Product: Arm Knitting Yarn for Chunky Braided Knot Throw Blanket DIY, Soft Extra Cotton Washable Tube Bulky Giant Yarn for Weave Craft Crochet (Dark Gray 2.2lb)
@@ -617,4 +623,11 @@ Rating:  ⭐⭐⭐⭐ (4/5)
 Review:  This is a nice kit, but my wife and kids were excited to try something new and actually found this difficult to pick up. It claims to be for beginners, however without any stitch experience it wasn't...
 --------------------------------------------------
 ```
+
+Discussion of query 10: "what is a good type of yarn for a beginner"
+This was one of the hardest queries we came up with, as the user is not sure what product they are looking for. BM25 returned some yarns, but also some loom sets, which are solidly different products, likely because the title still included the word yarn and the reviews mentioned the word beginner in them. Semantic search did a better job here, as the top 4 results are all yarns, unlike BM25. As crafters ourselves, we don't feel that this search returned yarns very good for beginnners, but that comes from our outside knowledge. It may just be that this query is too complex for the amount of information the search methods have access to. 
+
+
+## Summary of Insights:
+Overall, we found that BM25 does best when it is matching specific keywords in the query to either the product title or the review text. For example, it did great with a sewing machine model number, and did well with specific searches, like "acrylic paint". It struggled however with capturing more queries with synonyms in them instead of the specific product words, such as "yarn made of natural fibers". Semantic search did the opposite. It struggled a bit with specific model numbers, but did better with synonyms in searches, such as "animal stickers". Both queries struggled with vague or open-ended queries such as "what is a good type of yarn for a beginner". We believe that this is because our dataset doesn't have much information related to beginners and suitability of products, so there was no way for either method to successfully perform this search. RAG (Retrieval-Augmented Generation) could likely help with this type of query. RAG would read through the top results and could then generate a summary response, such as "Many people say _____ type of yarn is best for beginners". Reranking would help ensure more precise results. In this method, we could use BM25 to quickly get for example the top 100 results, then use a cross-encoder which is smarter and able to use context and intent to return more useful results. This could likely help for example in the "cute embroidery patterns" query. 
 
