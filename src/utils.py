@@ -9,14 +9,14 @@ def simple_tokenize(text):
     # Split into a list of words
     return text.split()
 
-def display_results(scored_results, title="Top 3 Search Results", score_label="Score"):
+def display_results(scored_results, k=3, title="Top Search Results", score_label="Score"):
     """
-    To display search results. Defaults outputs the top 3 results.
+    To display search results. Defaults outputs the top k results.
     """
     print(f"{title}\n" + "="*50)
     
-    # Slice the list to ensure we only process a maximum of 3 results
-    for rank, (doc, score) in enumerate(scored_results[:3], 1):
+    # Slice the list to ensure we only process a maximum of k results
+    for rank, (doc, score) in enumerate(scored_results[:k], 1):
         
         # Parse the title and text out of the page_content string
         lines = doc.page_content.split('\n')
