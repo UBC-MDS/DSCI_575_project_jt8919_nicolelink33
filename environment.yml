@@ -15,15 +15,15 @@ dependencies:
   - duckdb=1.5.1
   - streamlit=1.56.0
   - pytorch=2.2.2
-  - torchvision=0.26.0
-  - transformers<=4.40.0
+  - torchvision
+  - transformers
 
   - pip:
     - python-dotenv==1.2.2
     - rank_bm25==0.2.2
     - langchain_community==0.4.1
-    - rank_bm25==0.2.2
-    - sentence-transformers==5.4.0
+    - sentence-transformers>=3.0.0
+    - huggingface_hub>=0.30.0
     - langchain_huggingface==1.2.1
     - langchain-openai==1.1.12
     - faiss-cpu==1.13.2
