@@ -1,4 +1,4 @@
-# Arts and Crafts Product Search:
+# Arts and Crafts Product Search
 ### DSCI_575_project_jt8919_nicolelink33
 Authors: Jennifer Tsang, Nicole Link
 
