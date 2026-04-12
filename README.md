@@ -41,14 +41,12 @@ Create the environment
 conda env create -f environment.yml
 conda activate 575-app
 ```
-Open the project repo in VSCode or an editor of your choice, and ensure that in the VSCode you are using the `575-app` environment. 
+Open `notebooks/milestone1_exploration.ipynb` in VSCode or an editor of your choice, and ensure that in VSCode you are using the `575-app` environment. Run all cells in this notebook. This does necessary data downloading, data processing, and model building. 
 ```bash
-code .
+code notebooks/milestone1_exploration.ipynb
 ```
 
-Open `notebooks/milestone1_exploration.ipynb` and run all cells. This does necessary data downloading, data processing, and model building. 
-
-Open `app/app.py` and run the dashboard locally:
+To run the dashboard locally, in terminal:
 ```bash
 streamlit run app/app.py
 ```
@@ -58,5 +56,7 @@ http://localhost:8501/
 
 
 ## Attribution
+
+Authors: Jennifer Tsang, Nicole Link
 
 Generative AI tools (Google Gemini) were used to assist with code generation and documentation drafting. All generated content was reviewed and edited by the authors to ensure accuracy and quality.
