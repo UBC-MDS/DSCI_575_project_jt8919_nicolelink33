@@ -41,14 +41,14 @@ Create the environment
 conda env create -f environment.yml
 conda activate 575-app
 ```
-Open the project repo in VSCode or an editor of your choice, and ensure that in the VSCode you are using the 575-app environment. 
+Open the project repo in VSCode or an editor of your choice, and ensure that in the VSCode you are using the `575-app` environment. 
 ```bash
 code .
 ```
 
-Open notebooks/milestone1_exploration.ipynb and run all cells. This does necessary data downloading and processing. 
+Open `notebooks/milestone1_exploration.ipynb` and run all cells. This does necessary data downloading, data processing, and model building. 
 
-Open app/app.py and run the dashboard locally:
+Open `app/app.py` and run the dashboard locally:
 ```bash
 streamlit run app/app.py
 ```
