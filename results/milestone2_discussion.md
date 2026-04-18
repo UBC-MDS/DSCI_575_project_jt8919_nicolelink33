@@ -277,3 +277,5 @@ How the RAG workflow is performing overall.
 Suggestions for how the workflow’s performance could be improved.
 
 - Use a bigger model, this LLM is pretty small, it might generate better results with a bigger LLM
+- Give the model a larger response length. It might get cut off mid sentence less often then. 
+- Currently most of our queries are designed for simple product retrieval (eg. sewing machine), which our simple retrieval is already sufficient for. The LLM would be much more useful/applicable for more complex questions, like "which sewing machine is the most durable over a long time of use?"
