@@ -15,15 +15,18 @@ To prepare the sampled subset for search indexing, the tabular data was transfor
 The system employs a dual-engine architecture to retrieve relevant documents based on user queries:
 
 - **Lexical Search (BM25)**: A sparse retrieval engine that uses a custom tokenizer to match exact keywords.
-
 - **Semantic Search (FAISS)**: A dense vector database powered by Facebook AI Similarity Search. Documents and user queries are embedded into a vector space using `sentence-transformers` and `all-MiniLM-L6-v2` model, allowing the system to retrieve results based on contextual meaning.
+- **Hybrid Retrieval**: An ensemble approach that combines the strengths of both semantic search and BM25 lexical search to retrieve the most contextually relevant and keyword-accurate product reviews.
 
-### RAG Pipeline Workflow Diagram
+### Generative AI & RAG (Retrieval-Augmented Generation):
+To elevate the dashboard from a basic search engine to a shopping assistant, we implemented a full text-generation pipeline:
+
+- **LLM Pipeline**: We integrated an open-source Language Model (`Qwen/Qwen2.5-0.5B`) to synthesize retrieved context and generate natural-language answers to user queries.
+- **Semantic RAG**: Initially built using solely semantic retrieval, the model grounds its answers in the retrieved Amazon dataset rather than its internal parametric memory.
+- **Hybrid RAG**: The final pipeline uses our custom Hybrid Retriever to pass higher quality context to the LLM. It utilizes a carefully designed Prompt Template to prevent hallucination, forcing the model to rely only on provided reviews and metadata, and to cite the product ASIN.
+
+#### RAG Pipeline Workflow Diagram
 ![](img/rag_pipeline.png)
-
-
-
-
 
 
 ## Instructions to Run Locally:
@@ -49,10 +52,13 @@ Create the environment
 conda env create -f environment.yml
 conda activate 575-app
 ```
+
 Open `notebooks/milestone1_exploration.ipynb` in VSCode or an editor of your choice, and ensure that in VSCode you are using the `575-app` environment. Run all cells in this notebook. This does necessary data downloading, data processing, and model building. 
 ```bash
 code notebooks/milestone1_exploration.ipynb
 ```
+
+Can also explore our RAG pipeline testing and qualitative prompt evalution in `notebooks/milestone2_rag.ipynb`.
 
 To run the dashboard locally, in terminal:
 ```bash
@@ -61,6 +67,8 @@ streamlit run app/app.py
 
 Open the dashboard in your browser. 
 http://localhost:8501/
+
+You can switch between traditional Search Only mode and the new RAG Assistant mode by switching between the tabs **Search** and **RAG**. 
 
 
 ## Attribution
