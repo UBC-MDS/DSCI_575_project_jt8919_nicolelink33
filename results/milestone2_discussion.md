@@ -2,10 +2,6 @@
 
 ## Model Choice and Rationale
 
-Started out with `HuggingFace` model `Qwen/Qwen2.5-0.5B` because it is a small and light model that can run locally on our computers. Since our computers have a GPU, this model ran fairly smoothly. In the future for improvements, we will consider using Groq to see if running a larger LLM model remotely can generate better results. 
-
-## Model Choice and Rationale
-
 We selected the `Qwen/Qwen2.5-0.5B` model via `HuggingFace` as our initial LLM. This choice was driven by its small parameter size and lightweight architecture, which allowed us to run the model locally on our machines. Since our computers had GPU on it, the model ran fairly smoothly. For future improvements, we plan to explore using the Groq API to access larger, more capable LLMs remotely. 
 
 
