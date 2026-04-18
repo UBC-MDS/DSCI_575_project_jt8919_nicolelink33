@@ -19,7 +19,7 @@ The system employs a dual-engine architecture to retrieve relevant documents bas
 - **Semantic Search (FAISS)**: A dense vector database powered by Facebook AI Similarity Search. Documents and user queries are embedded into a vector space using `sentence-transformers` and `all-MiniLM-L6-v2` model, allowing the system to retrieve results based on contextual meaning.
 
 ### RAG Pipeline Workflow Diagram
-[](img/rag_pipeline_workflow.png)
+[](img/rag_pipeline.png)
 
 
 
