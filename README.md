@@ -6,13 +6,13 @@ This is an interactive tool which allows for search and retrieval of arts and cr
 
 ## Description
 ### Dataset: 
-The dataset contains Amazon reviews collected in 2023 by McAuley Lab. It contains reviews on products that belong to the Arts and Crafts category. Our dashboard specifically searches from a subset of this dataset. The subset removed very short reviews (< 20 characters), stratified the dataset by short and long reviews, and by the number of stars, and sampled 50 reviews per strata, prioritizing the most helpful reviews. 
+The dataset contains Amazon reviews collected in 2023 by McAuley Lab. It contains reviews on products that belong to the Arts and Crafts category. Our dashboard specifically searches from a subset of this dataset, which contains the most helpful review per product (decided by the number of helpful votes a review received). The subset contains approximately 16,000 products. 
 
 ### Data Processing:
 To prepare the sampled subset for search indexing, the tabular data was transformed into LangChain `Document` objects. We engineered a dense text string for the `page_content` by concatenating the product title, category, and review text. All structured attributes such as numerical ratings, price, and helpful votes were separated and preserved as queryable metadata. For lexical search compatibility, the text underwent preprocessing using a custom tokenizer to convert characters to lowercase, remove punctuation, and split strings into discrete words.
 
 ### Retrieval Workflows:
-The system employs a dual-engine architecture to retrieve relevant documents based on user queries:
+The system employs a variety of retrieval methods to find relevant documents based on user queries:
 
 - **Lexical Search (BM25)**: A sparse retrieval engine that uses a custom tokenizer to match exact keywords.
 - **Semantic Search (FAISS)**: A dense vector database powered by Facebook AI Similarity Search. Documents and user queries are embedded into a vector space using `sentence-transformers` and `all-MiniLM-L6-v2` model, allowing the system to retrieve results based on contextual meaning.
@@ -21,12 +21,16 @@ The system employs a dual-engine architecture to retrieve relevant documents bas
 ### Generative AI & RAG (Retrieval-Augmented Generation):
 To elevate the dashboard from a basic search engine to a shopping assistant, we implemented a full text-generation pipeline:
 
-- **LLM Pipeline**: We integrated an open-source Language Model (`Qwen/Qwen2.5-0.5B`) to synthesize retrieved context and generate natural-language answers to user queries.
+- **LLM Pipeline**: We integrated a GroqChat model "llama-3.1-8b-instant" to synthesize retrieved context and generate natural-language answers to user queries.
 - **Semantic RAG**: Initially built using solely semantic retrieval, the model grounds its answers in the retrieved Amazon dataset rather than its internal parametric memory.
 - **Hybrid RAG**: The final pipeline uses our custom Hybrid Retriever to pass higher quality context to the LLM. It utilizes a carefully designed Prompt Template to prevent hallucination, forcing the model to rely only on provided reviews and metadata, and to cite the product ASIN.
 
 #### RAG Pipeline Workflow Diagram
 ![](img/rag_pipeline.png)
+
+### Deployment:
+The dashboard is deployed on ___________
+# PUT DEPLOYMENT DETAILS HERE
 
 
 ## Instructions to Run Locally:
@@ -69,6 +73,10 @@ Open the dashboard in your browser.
 http://localhost:8501/
 
 You can switch between traditional Search Only mode and the new RAG Assistant mode by switching between the tabs **Search** and **RAG**. 
+
+## Usage Examples
+
+_________________________
 
 
 ## Attribution
