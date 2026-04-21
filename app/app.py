@@ -166,47 +166,51 @@ with tab_rag:
             with st.spinner("Analyzing reviews and generating answer..."):
                 
                 # initialize LLM
-                generator = pipeline(
-                    "text-generation",
-                    model="Qwen/Qwen2.5-0.5B",
-                    torch_dtype=torch.float16,
-                    device="mps",
-                    trust_remote_code=True,
-                    max_new_tokens=128,
-                    do_sample=True,
-                )
+                # generator = pipeline(
+                #     "text-generation",
+                #     model="Qwen/Qwen2.5-0.5B",
+                #     torch_dtype=torch.float16,
+                #     device="mps",
+                #     trust_remote_code=True,
+                #     max_new_tokens=128,
+                #     do_sample=True,
+                # )
 
-                llm = HuggingFacePipeline(pipeline=generator)
+                # llm = HuggingFacePipeline(pipeline=generator)
+                llm = ChatGroq(model="llama-3.1-8b-instant")
 
                 rag_chain = get_rag_chain(bm25, semantic, llm)
 
                 # 1. Run the chain
                 full_output = rag_chain.invoke(rag_query)
 
+                st.write(full_output)
+
+
                 # 2. Split the output into Context and Answer
-                parts = full_output.split("Question:")
-                context_block = parts[0].replace("Human:", "").replace("Context:", "").strip()
+                # parts = full_output.split("Question:")
+                # context_block = parts[0].replace("Human:", "").replace("Context:", "").strip()
                 
-                answer_part = "I couldn't generate a summary."
-                if "Answer:" in full_output:
-                    answer_part = full_output.split("Answer:")[-1].strip()
+                # answer_part = "I couldn't generate a summary."
+                # if "Answer:" in full_output:
+                #     answer_part = full_output.split("Answer:")[-1].strip()
 
-                # 3. Display the AI Summary First
-                st.subheader("🤖 AI Summary")
-                st.write(answer_part)
+                # # 3. Display the AI Summary First
+                # st.subheader("🤖 AI Summary")
+                # st.write(answer_part)
 
-                st.divider()
+                # st.divider()
 
-                # 4. Display the Reviews
-                st.subheader("📄 Related Reviews Used")
+                # # 4. Display the Reviews
+                # st.subheader("📄 Related Reviews Used")
                 
-                reviews = context_block.split("Product ASIN:")
-                for review in reviews:
-                    clean_review = review.strip()
+                # reviews = context_block.split("Product ASIN:")
+                # for review in reviews:
+                #     clean_review = review.strip()
     
-                    if not clean_review or "You are a helpful Amazon shopping assistant" in clean_review:
-                        continue
+                #     if not clean_review or "You are a helpful Amazon shopping assistant" in clean_review:
+                #         continue
                     
-                    with st.container():
-                        st.markdown(f"**Product ASIN:** {clean_review}")
-                        st.divider()
+                #     with st.container():
+                #         st.markdown(f"**Product ASIN:** {clean_review}")
+                #         st.divider()
