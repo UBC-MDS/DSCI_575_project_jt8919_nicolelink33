@@ -4,6 +4,9 @@ Authors: Jennifer Tsang, Nicole Link
 
 This is an interactive tool which allows for search and retrieval of arts and crafts supplies based on an [Amazon 2023 reviews dataset](https://amazon-reviews-2023.github.io/).
 
+## Demo Usage:
+![](img/demo.gif)
+
 ## Description
 ### Dataset: 
 The dataset contains Amazon reviews collected in 2023 by McAuley Lab. It contains reviews on products that belong to the Arts and Crafts category. Our dashboard specifically searches from a subset of this dataset, which contains the most helpful review per product (decided by the number of helpful votes a review received). The subset contains approximately 16,000 products. 
