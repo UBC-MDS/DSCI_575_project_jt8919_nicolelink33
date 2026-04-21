@@ -1,4 +1,5 @@
 import re
+import math
 
 # Tokenization function
 def simple_tokenize(text):
@@ -30,8 +31,15 @@ def display_results(scored_results, k=3, title="Top Search Results", score_label
             truncated_review = review_text
             
         # Format the rating as visual stars
-        rating = int(doc.metadata.get('rating', 0))
-        stars = "⭐" * rating
+        raw_rating = doc.metadata.get('rating', 0)
+        
+        # Check if the rating is NaN or None
+        if raw_rating is None or (isinstance(raw_rating, float) and math.isnan(raw_rating)):
+            rating = 0
+            stars = "No rating"
+        else:
+            rating = int(raw_rating)
+            stars = "⭐" * rating
         
         # Display the formatted result
         # Standardized to 3 decimal places for both to keep it uniform
