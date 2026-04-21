@@ -28,3 +28,4 @@ dependencies:
     - langchain_huggingface==1.2.1
     - langchain-openai==1.1.12
     - faiss-cpu==1.13.2
+    - langchain-groq==1.1.2
