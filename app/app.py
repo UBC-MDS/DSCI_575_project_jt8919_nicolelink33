@@ -38,7 +38,7 @@ def load_search_engines():
 
     # Create ABSOLUTE paths for your models using the project_root
     bm25_path = project_root / 'models' / 'bm25_metadata_index_2.pkl'
-    faiss_path = project_root / 'models' / 'faiss_index'
+    faiss_path = project_root / 'models' / 'faiss_index_big'
 
     # Load bm25 search model
     if not bm25_path.exists():
