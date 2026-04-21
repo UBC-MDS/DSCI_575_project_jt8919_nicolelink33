@@ -9,7 +9,7 @@ This is an interactive tool which allows for search and retrieval of arts and cr
 
 ## Description
 ### Dataset: 
-The dataset contains Amazon reviews collected in 2023 by McAuley Lab. It contains reviews on products that belong to the Arts and Crafts category. Our dashboard specifically searches from a subset of this dataset, which contains the most helpful review per product (decided by the number of helpful votes a review received). The subset contains approximately 16,000 products. 
+The dataset contains Amazon reviews collected in 2023 by McAuley Lab. It contains products and reviews that belong to the Arts and Crafts category. Our dashboard specifically searches from a subset of this dataset, which contains the most helpful review per product (decided by the number of helpful votes a review received). The subset contains approximately 16,000 products. It is important to note that the data provided by McAuley lab included some products without reviews, and some reviews that were not linked to products in the metadata file. We chose to prioritize the product title and details over the reviews, by doing a right join of reviews and metadata. Therefore, some results from this dashboard may be missing ratings and review text. 
 
 ### Data Processing:
 To prepare the sampled subset for search indexing, the tabular data was transformed into LangChain `Document` objects. We engineered a dense text string for the `page_content` by concatenating the product title, category, and review text. All structured attributes such as numerical ratings, price, and helpful votes were separated and preserved as queryable metadata. For lexical search compatibility, the text underwent preprocessing using a custom tokenizer to convert characters to lowercase, remove punctuation, and split strings into discrete words.
@@ -76,11 +76,6 @@ Open the dashboard in your browser.
 http://localhost:8501/
 
 You can switch between traditional Search Only mode and the new RAG Assistant mode by switching between the tabs **Search** and **RAG**. 
-
-## Usage Examples
-
-_________________________
-
 
 ## Attribution
 
