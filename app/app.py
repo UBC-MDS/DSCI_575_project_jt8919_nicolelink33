@@ -18,6 +18,9 @@ from src.bm25 import search_bm25_with_scores
 from src.semantic import search_semantic_with_scores
 from src.hybrid import get_hybrid_retriever
 from src.rag_pipeline import get_rag_chain
+from langchain_groq import ChatGroq
+from dotenv import load_dotenv
+load_dotenv()
 
 
 # -----------------------------------------------------------------------------
@@ -29,7 +32,7 @@ def load_search_engines():
     print("Loading search models into memory...") 
 
     # Load bm25 search model
-    bm25_path = Path('models/bm25_metadata_index_2.pkl')
+    bm25_path = Path("models/bm25_metadata_index_big.pkl")
     if not bm25_path.exists():
         st.error(f"Could not find the index file at {bm25_path.absolute()}")
         return None, None
@@ -39,7 +42,7 @@ def load_search_engines():
         bm25_model = pickle.load(f)
 
     # Load semantic search model
-    faiss_path = "models/faiss_index"
+    faiss_path = "models/faiss_index_big"
     if not Path(faiss_path).exists():
         st.error(f"Could not find the FAISS index folder at {faiss_path}")
         return bm25_model, None
@@ -152,7 +155,7 @@ with tab_rag:
     st.markdown("Ask a question, and the system will summarize an answer based on the top product reviews.")
     
     rag_query = st.text_input("Ask a question about the products:", 
-                              placeholder="e.g., 'What are the main complaints about the battery?'", 
+                              placeholder="e.g., 'What are the main complaints about the yarn?'", 
                               key="rag_query_input")
     
     if st.button("Generate Answer", key="rag_btn"):
@@ -162,17 +165,19 @@ with tab_rag:
             with st.spinner("Analyzing reviews and generating answer..."):
                 
                 # initialize LLM
-                generator = pipeline(
-                    "text-generation",
-                    model="Qwen/Qwen2.5-0.5B",
-                    torch_dtype = torch.float16,
-                    device="mps",
-                    trust_remote_code=True,
-                    max_new_tokens=128,
-                    do_sample=True,
-                )
+                # generator = pipeline(
+                #     "text-generation",
+                #     model="Qwen/Qwen2.5-0.5B",
+                #     torch_dtype = torch.float16,
+                #     device="mps",
+                #     trust_remote_code=True,
+                #     max_new_tokens=128,
+                #     do_sample=True,
+                # )
 
-                llm = HuggingFacePipeline(pipeline=generator)
+                # llm = HuggingFacePipeline(pipeline=generator)
+
+                llm = ChatGroq(model="llama-3.1-8b-instant")
 
                 rag_chain = get_rag_chain(bm25, semantic, llm)
 
@@ -180,34 +185,34 @@ with tab_rag:
                 full_output = rag_chain.invoke(rag_query)
 
                 # 2. Split the output into Context and Answer
-                # We split at "Question:" to separate the reviews from the response
-                parts = full_output.split("Question:")
-                context_block = parts[0].replace("Human:", "").replace("Context:", "").strip()
+                # # We split at "Question:" to separate the reviews from the response
+                # parts = full_output.split("Question:")
+                # context_block = parts[0].replace("Human:", "").replace("Context:", "").strip()
                 
-                # Get the Answer specifically
-                answer_part = "I couldn't generate a summary."
-                if "Answer:" in full_output:
-                    answer_part = full_output.split("Answer:")[-1].strip()
+                # # Get the Answer specifically
+                # answer_part = "I couldn't generate a summary."
+                # if "Answer:" in full_output:
+                #     answer_part = full_output.split("Answer:")[-1].strip()
 
                 # 3. Display the AI Summary First (Clean text, no scroll box)
                 st.subheader("🤖 AI Summary")
-                st.write(answer_part)
+                st.write(full_output)
 
                 st.divider()
 
-                # 4. Display the Reviews (Cleanly formatted)
-                st.subheader("📄 Related Reviews Used")
+                # # 4. Display the Reviews (Cleanly formatted)
+                # st.subheader("📄 Related Reviews Used")
                 
-                # We split the context block by "Product ASIN:" to show individual reviews
-                reviews = context_block.split("Product ASIN:")
-                for review in reviews:
-                    clean_review = review.strip()
+                # # We split the context block by "Product ASIN:" to show individual reviews
+                # reviews = context_block.split("Product ASIN:")
+                # for review in reviews:
+                #     clean_review = review.strip()
     
-                    # SKIP the item if it contains your system prompt or is empty
-                    if not clean_review or "You are a helpful Amazon shopping assistant" in clean_review:
-                        continue
+                #     # SKIP the item if it contains your system prompt or is empty
+                #     if not clean_review or "You are a helpful Amazon shopping assistant" in clean_review:
+                #         continue
                     
-                    with st.container():
-                        # Add the prefix back for a clean look
-                        st.markdown(f"**Product ASIN:** {clean_review}")
-                        st.divider()
+                #     with st.container():
+                #         # Add the prefix back for a clean look
+                #         st.markdown(f"**Product ASIN:** {clean_review}")
+                #         st.divider()
