@@ -2,10 +2,14 @@ import sys
 import os
 from pathlib import Path
 
-project_root = Path(__file__).resolve().parent.parent
-if str(project_root) not in sys.path:
-    sys.path.append(str(project_root))
-os.chdir(project_root)
+# project_root = Path(__file__).resolve().parent.parent
+# if str(project_root) not in sys.path:
+#     sys.path.append(str(project_root))
+# os.chdir(project_root)
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(current_dir)
+bm25_path = os.path.join(project_root, "models", "bm25_metadata_index_big.pkl")
 
 import torch
 import streamlit as st
@@ -32,7 +36,7 @@ def load_search_engines():
     print("Loading search models into memory...") 
 
     # Load bm25 search model
-    bm25_path = Path("models/bm25_metadata_index_big.pkl")
+    # bm25_path = Path("models/bm25_metadata_index_big.pkl")
     if not bm25_path.exists():
         st.error(f"Could not find the index file at {bm25_path.absolute()}")
         return None, None
