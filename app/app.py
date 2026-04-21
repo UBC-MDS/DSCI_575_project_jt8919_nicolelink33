@@ -8,6 +8,9 @@ import transformers
 from transformers import pipeline
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings, HuggingFacePipeline
+from langchain_groq import ChatGroq
+from dotenv import load_dotenv
+load_dotenv()
 
 # -----------------------------------------------------------------------------
 # PATH CONFIGURATION
