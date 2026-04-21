@@ -1,5 +1,4 @@
 # Requirements for Posit Connect Cloud Deployment (575-app)
-# Generated from environment.yml
 
 # Core Data & Processing
 numpy<2
@@ -17,7 +16,8 @@ streamlit==1.56.0
 torch==2.2.2
 torchvision==0.17.2
 transformers<=4.40.0
-sentence-transformers==5.4.0
+# Downgraded to ensure compatibility with transformers <= 4.40.0
+sentence-transformers<=2.7.0
 faiss-cpu==1.13.2
 
 # LangChain & LLM Integration
@@ -29,6 +29,3 @@ rank_bm25==0.2.2
 
 # Utilities
 python-dotenv==1.2.2
-
-# Note: python, pip, ipykernel, and jupyterlab are omitted 
-# as they are typically handled by the environment runtime.
