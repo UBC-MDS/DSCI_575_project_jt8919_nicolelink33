@@ -66,9 +66,9 @@ The Groq Llama model did a much better job of understanding its purpose and help
 ## Step 2: Additional Feature (state which option you chose)
 
 ### What You Implemented
-We chose to **Option 4: Deploy your Application**.
+We chose to do **Option 4: Deploy your Application**.
 
-We created a requirements.txt file, pushed our models onto Github, changed our GitHub repository to be public, and deployed our app on posit Connect Cloud. The application can be accessed [here](https://019db1db-e2bc-e6bc-39b5-089e24287c7b.share.connect.posit.cloud/). 
+We created a `requirements.txt` file, pushed our models onto GitHub, changed our GitHub repository to be public, and deployed our application on [posit Connect Cloud](https://connect.posit.cloud/). The application can be accessed [here](https://019db1db-e2bc-e6bc-39b5-089e24287c7b.share.connect.posit.cloud/). 
 
 This is a simplied version compared to deploying a real-world RAG application and hosting it on AWS. The details of our cloud deployment plan can be found in **Step 4**. 
   
