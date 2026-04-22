@@ -32,9 +32,9 @@ To elevate the dashboard from a basic search engine to a shopping assistant, we 
 ![](img/rag_pipeline.png)
 
 ### Deployment:
-The dashboard is deployed on ___________
-# PUT DEPLOYMENT DETAILS HERE
-
+Our Streamlit dashboard is deployed on Posit Connect Cloud and is permanently available at:
+<https://019db1db-e2bc-e6bc-39b5-089e24287c7b.share.connect.posit.cloud/>.
+We added the required API key as a secret in Posit Connect Cloud to allow access to the Groq Llama model. 
 
 ## Instructions to Run Locally:
 
