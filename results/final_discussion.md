@@ -1,10 +1,15 @@
 # Final Discussion
 
-## Step 1: Improve Your Workflow
+## Improve Your Workflow
 
 ### Dataset Scaling
-- Number of products used
-- Changes to sampling strategy (if any)
+Initially, we worked with a small, stratified sample of the review data (641 rows) to build and test the prototype of our retrieval models. To scale the application for production, we expanded our scope to use the full dataset. After joining the reviews and metadata datasets together, our final corpus consists of 19988 documents.
+
+By taking a closer look at the joins during this scaling process, we realized that some products contained rich metadata (such as price, ratings, and ASIN) but lacked a product title, while other products had proper titles but were missing metadata fields. 
+
+From a user's perspective, we thought that the response is more humanly interpretable when the results contain a natural-language product title instead of an alphanumeric ASIN. Therefore, we structured our pipeline to prioritize products with titles. As a result, when using our application, a user may occasionally notice that some recommended products are missing prices or reviews. 
+
+In the future, this feature can be improved by upgrading our pipeline into an Agentic RAG system. By integrating an external web-search tool into the LLM's pipeline, the system could dynamically search the internet to fill in missing pricing or metadata information based on the product title in real-time before returning the final answer to the user.
 
 ### LLM Experiment
 - Models compared (name, family, size)
@@ -63,14 +68,16 @@ The Groq Llama model did a much better job of understanding its purpose and help
 
 
 
-## Step 2: Additional Feature (state which option you chose)
+## Additional Feature (state which option you chose)
 
 ### What You Implemented
+We chose to do **Option 4: Deploy your Application**.
 
-- Description of the feature
-- Key results or examples
+We created a `requirements.txt` file, pushed our models onto GitHub, changed our GitHub repository to be public, and deployed our application on [posit Connect Cloud](https://connect.posit.cloud/). The application can be accessed [here](https://019db1db-e2bc-e6bc-39b5-089e24287c7b.share.connect.posit.cloud/). 
+
+This is a simplied version compared to deploying a real-world RAG application and hosting it on AWS. The details of our cloud deployment plan can be found below in **Cloud Deployment Plan**. 
   
-## Step 3: Improve Documentation and Code Quality
+## Improve Documentation and Code Quality
 
 ### Documentation Update
 In the README for this repository, we first added an example usage demo gif, to show the user what the dashboard looks like, and how a typical search would work on it. We also updated our description of the datase to match our larger sampled subset and our prioritization of product titles over product ID's. Finally, we added details of deployment method and added the link to our permanently available dashboard. 
@@ -78,5 +85,30 @@ In the README for this repository, we first added an example usage demo gif, to 
 ### Code Quality Changes
 Overall, to clean up our code, we added docstrings to all functions. We removed previous code chunks that were commented out and no longer being used, as well as a few initial exploratory code chunks. We cleaned up the commenting in our code to be clear but not excessive, and finally updated our environment and requirements files to use the new necessary packages. We already had no hardcoded file paths, no API keys in source code, and no temporary or unnecessary large files in our repository, so nothing needed to be cleaned in these topics. 
 
-## Step 4: Cloud Deployment Plan
-(See Step 4 above for required subsections)
+## Cloud Deployment Plan
+
+As a future step, we would like to deploy our Amazon Arts and Crafts recommendation tool as a production-ready application. We plan to deploy the architecture on Amazon Web Services (AWS). Below is a detailed plan for data storage, computation, and continuous updates.
+
+### Data Storage
+
+- **Raw Data**: the raw data coming from the internet is in JSON format. Our code will read and process it into a `.parquet` file before storing it in Amazon S3 bucket to optimize reading speed and reduce storage cost. 
+
+- **Processed Data**: The cleaned data will also be stored in S3 bucket in a parquet file like the raw data. 
+
+- **Vector Index & BM25 Index**: The `.faiss` and `.pkl` index files will be stored in S3 and loaded into the application's RAM upon startup.  
+
+### Compute
+
+- **Application Hosting**: To run our Streamlit application, we will containerize it using Docker and host it on an Amazon EC2 instance. Another option for serverless container management is to use Amazon ECS. 
+
+- **Handling Concurrency**: To handle multiple users concurrently, we will place an Application Load Balancer (ALB) in front of our EC2 instances.
+
+- **LLM Inference**: We will use an API-based approach (currently using Groq) for LLM inference rather than hosting the model locally on the EC2 instance. This avoids the need for expensive GPU instances, making it more cost-efficient and better scalability.
+
+### Streaming/Updates
+To keep our pipeline up to date and incorporate new products into production dynamically, we will build an automated event-driven architecture using AWS Lambda:
+
+1. New raw data is uploaded to S3 bucket.
+2. This upload triggers an AWS Lambda function, which executes our data processing script to clean the new data, call the embedding model API to generate new vectors, and apply our custom tokenizer.
+3. The new dense vectors and BM25 tokens are appended to our existing indexes and updated on our running instances.
+4. The new products are now live and searchable by the RAG pipeline without requiring application downtime or a full historical re-index. 
