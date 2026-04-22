@@ -17,14 +17,13 @@ load_dotenv()
 # -----------------------------------------------------------------------------
 # Get the absolute path of the directory containing app.py file
 current_dir = Path(__file__).resolve().parent
-
 project_root = current_dir.parent
 
 # Add project root to sys.path so 'src' module imports work
 if str(project_root) not in sys.path:
     sys.path.append(str(project_root))
 
-# Now we can safely import from src
+# Imports from src
 from src.bm25 import search_bm25_with_scores
 from src.semantic import search_semantic_with_scores
 from src.hybrid import get_hybrid_retriever
@@ -32,14 +31,15 @@ from src.rag_pipeline import get_rag_chain
 
 
 # -----------------------------------------------------------------------------
-# 1. Load Data and Models (Cached)
+# Load Data and Models
 # -----------------------------------------------------------------------------
 @st.cache_resource
 def load_search_engines():
+    """Load the BM25 and Semantic Search models from the saved pickle and index files."""
 
     print("Loading search models into memory...") 
 
-    # Create ABSOLUTE paths for your models using the project_root
+    # ABSOLUTE paths for models using project_root
     bm25_path = project_root / 'models' / 'bm25_metadata_index_2.pkl'
     faiss_path = project_root / 'models' / 'faiss_index_big'
 
@@ -71,19 +71,22 @@ def load_search_engines():
 bm25, semantic = load_search_engines()
 
 # -----------------------------------------------------------------------------
-# 2. Define Search Wrapper Functions
+# Search Wrapper Functions
 # -----------------------------------------------------------------------------
 def run_bm25_search(query, model):
+    """Run a BM25 search using the provided query and BM25 retriever."""
     return search_bm25_with_scores(model, query, k=3)
 
 def run_semantic_search(query, model):
+    """Run a semantic search using the provided query and semantic retriever."""
     return search_semantic_with_scores(model, query, k=3)
 
 def get_ensemble(bm25_retriever, semantic_vectorstore, k=3, weights=[0.4, 0.6]):
+    """Run a hybrid search using the provided BM25 retriever, semantic vector store, number of items to return, and weights for prioritization of the two methods."""
     return get_hybrid_retriever(bm25_retriever, semantic_vectorstore, k=3, weights=[0.4, 0.6])
 
 # -----------------------------------------------------------------------------
-# 3. Build the Dashboard UI
+# Dashboard UI
 # -----------------------------------------------------------------------------
 st.title("🔍 Amazon Reviews Search Engine")
 st.markdown("Search through product reviews or generate insights using AI.")
@@ -122,7 +125,7 @@ with tab_search:
                     results = run_semantic_search(query, semantic)
                 
                 # -----------------------------------------------------------------
-                # 4. Display Results
+                # Display Results
                 # -----------------------------------------------------------------
                 st.markdown(f"**Top Results for:** '{query}'")
                 
@@ -168,52 +171,14 @@ with tab_rag:
         else:
             with st.spinner("Analyzing reviews and generating answer..."):
                 
-                # initialize LLM
-                # generator = pipeline(
-                #     "text-generation",
-                #     model="Qwen/Qwen2.5-0.5B",
-                #     torch_dtype=torch.float16,
-                #     device="mps",
-                #     trust_remote_code=True,
-                #     max_new_tokens=128,
-                #     do_sample=True,
-                # )
-
-                # llm = HuggingFacePipeline(pipeline=generator)
                 llm = ChatGroq(model="llama-3.1-8b-instant")
 
                 rag_chain = get_rag_chain(bm25, semantic, llm)
 
-                # 1. Run the chain
+                # Run the chain
                 full_output = rag_chain.invoke(rag_query)
 
+                # -----------------------------------------------------------------
+                # Display Results
+                # -----------------------------------------------------------------
                 st.write(full_output)
-
-
-                # 2. Split the output into Context and Answer
-                # parts = full_output.split("Question:")
-                # context_block = parts[0].replace("Human:", "").replace("Context:", "").strip()
-                
-                # answer_part = "I couldn't generate a summary."
-                # if "Answer:" in full_output:
-                #     answer_part = full_output.split("Answer:")[-1].strip()
-
-                # # 3. Display the AI Summary First
-                # st.subheader("🤖 AI Summary")
-                # st.write(answer_part)
-
-                # st.divider()
-
-                # # 4. Display the Reviews
-                # st.subheader("📄 Related Reviews Used")
-                
-                # reviews = context_block.split("Product ASIN:")
-                # for review in reviews:
-                #     clean_review = review.strip()
-    
-                #     if not clean_review or "You are a helpful Amazon shopping assistant" in clean_review:
-                #         continue
-                    
-                #     with st.container():
-                #         st.markdown(f"**Product ASIN:** {clean_review}")
-                #         st.divider()

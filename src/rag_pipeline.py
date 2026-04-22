@@ -11,10 +11,10 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from src.hybrid import get_hybrid_retriever
 
-# RAG Pipeline script
-
-# Context building function
 def build_context(docs):
+    """
+    Builds context for documents by combining the title, review text, product ASIN, and rating.
+    """
     context_parts = []
     for doc in docs:
         content = doc.page_content
@@ -44,8 +44,10 @@ def build_context(docs):
     return "\n\n".join(context_parts)
 
 
-# Prompt template
 def get_prompt_template():
+    """
+    Builds an LLM prompt using ChatPromptTemplate.
+    """
     # baseline prompt
     prompt1 = ChatPromptTemplate.from_template(
     """
@@ -64,8 +66,6 @@ def get_prompt_template():
     )
     return prompt1
 
-
-# LLM
 
 def get_rag_chain(bm25_model, semantic_vectorstore, llm):
     """

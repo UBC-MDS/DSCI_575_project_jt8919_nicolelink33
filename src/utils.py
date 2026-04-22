@@ -1,8 +1,10 @@
 import re
 import math
 
-# Tokenization function
 def simple_tokenize(text):
+    """
+    Simple tokenization function - takes text in, returns text with all lowercase characters, removed everything except letters, numbers, spaces, and hyphens, and split into a list of words.
+    """
     # Lowercase everything
     text = text.lower()
     # Remove everything except letters, numbers, spaces, and hyphens
@@ -12,7 +14,7 @@ def simple_tokenize(text):
 
 def display_results(scored_results, k=3, title="Top Search Results", score_label="Score"):
     """
-    To display search results. Defaults outputs the top k results.
+    Aesthetically displays search results, outputting the top k results (defaults to 3 results).
     """
     print(f"{title}\n" + "="*50)
     
